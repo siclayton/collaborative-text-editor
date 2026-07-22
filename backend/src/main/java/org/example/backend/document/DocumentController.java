@@ -32,4 +32,9 @@ public class DocumentController {
         documentService.deleteDocumentById(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Document> updateDocumentById(@PathVariable Long id, @RequestBody Document document) {
+        Document updatedDocument = documentService.updateDocumentById(id, document);
+        return ResponseEntity.ok(updatedDocument);
+    }
 }

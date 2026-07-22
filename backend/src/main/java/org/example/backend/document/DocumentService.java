@@ -22,4 +22,11 @@ public class DocumentService {
     public void deleteDocumentById(Long id) {
         documentRepository.deleteById(id);
     }
+    public Document updateDocumentById(Long id, Document document) {
+        Document existingDocument = documentRepository.findById(id).orElseThrow();
+        existingDocument.setTitle(document.getTitle());
+        existingDocument.setContent(document.getContent());
+
+        return documentRepository.save(existingDocument);
+    }
 }
