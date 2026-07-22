@@ -23,4 +23,8 @@ public class DocumentController {
     public Document getDocumentById(@PathVariable Long id) {
         return documentRepository.findById(id).orElseThrow();
     }
+    @DeleteMapping("/{id}")
+    public void deleteDocumentById(@PathVariable Long id) {
+        documentRepository.deleteById(id);
+    }
 }
