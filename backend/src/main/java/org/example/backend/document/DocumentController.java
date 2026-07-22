@@ -1,30 +1,35 @@
 package org.example.backend.document;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/documents")
 public class DocumentController {
-    private final DocumentRepository documentRepository;
+    private final DocumentService documentService;
 
-    public DocumentController(DocumentRepository documentRepository) {
-        this.documentRepository = documentRepository;
+    public DocumentController(DocumentService documentService) {
+        this.documentService = documentService;
     }
     @PostMapping
-    public Document createDocument(@RequestBody Document document) {
-        return documentRepository.save(document);
+    public ResponseEntity<Document> createDocument(@RequestBody Document document) {
+        Document newDocument = documentService.createDocument(document);
+        return ResponseEntity.ok(newDocument);
     }
     @GetMapping
-    public List<Document> getAllDocuments() {
-        return documentRepository.findAll();
+    public ResponseEntity<List<Document>> getAllDocuments() {
+        List<Document> documents = documentService.getAllDocuments();
+        return ResponseEntity.ok(documents);
     }
     @GetMapping("/{id}")
-    public Document getDocumentById(@PathVariable Long id) {
-        return documentRepository.findById(id).orElseThrow();
+    public ResponseEntity<Document> getDocumentById(@PathVariable Long id) {
+        Document document = documentService.getDocumentById(id);
+        return ResponseEntity.ok(document);
     }
     @DeleteMapping("/{id}")
-    public void deleteDocumentById(@PathVariable Long id) {
-        documentRepository.deleteById(id);
+    public ResponseEntity<Void> deleteDocumentById(@PathVariable Long id) {
+        documentService.deleteDocumentById(id);
+        return ResponseEntity.noContent().build();
     }
 }
