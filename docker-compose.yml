@@ -4,7 +4,7 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+      POSTGRES_DB: collaborative_editor
     volumes:
       - postgres_data:/var/lib/postgresql/data
     # The ports section can be removed later, this just allows me to query the database from my computer while I am developing the application
