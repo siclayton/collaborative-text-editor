@@ -1,4 +1,4 @@
-package org.example.backend.document;
+package org.example.backend.exception;
 
 public class DocumentNotFoundException extends RuntimeException{
     public DocumentNotFoundException(Long id) {

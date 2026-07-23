@@ -1,5 +1,6 @@
 package org.example.backend.document;
 
+import org.example.backend.exception.DocumentNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
