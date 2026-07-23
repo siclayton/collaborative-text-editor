@@ -17,13 +17,17 @@ public class DocumentService {
         return documentRepository.findAll();
     }
     public Document getDocumentById(Long id) {
-        return documentRepository.findById(id).orElseThrow();
+        return documentRepository.findById(id).orElseThrow(()  -> new DocumentNotFoundException(id));
     }
     public void deleteDocumentById(Long id) {
+        if (!documentRepository.existsById(id)) {
+            throw new DocumentNotFoundException(id);
+        }
+
         documentRepository.deleteById(id);
     }
     public Document updateDocumentById(Long id, Document document) {
-        Document existingDocument = documentRepository.findById(id).orElseThrow();
+        Document existingDocument = documentRepository.findById(id).orElseThrow(() ->  new DocumentNotFoundException(id));
         existingDocument.setTitle(document.getTitle());
         existingDocument.setContent(document.getContent());
 

@@ -35,6 +35,10 @@ public class DocumentController {
     @PutMapping("/{id}")
     public ResponseEntity<Document> updateDocumentById(@PathVariable Long id, @RequestBody Document document) {
         Document updatedDocument = documentService.updateDocumentById(id, document);
+
+        if  (updatedDocument == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(updatedDocument);
     }
 }
